@@ -44,3 +44,12 @@ QUnit.test('IP.equal()', function (assert) {
 	// from http://superuser.com/q/894303
 	assert.ok(IP.equal('172.016.021.004', '172.14.17.4'), 'Same value');
 });
+
+QUnit.test('IP.random()', function (assert) {
+	var rand;
+	for (var i = 0; i < 10; i++) {
+		rand = IP.random();
+		assert.equal(typeof rand, 'string', 'Result must be string');
+		assert.notEqual(IP.parse(rand), null, 'Result must be valid');
+	}
+});
