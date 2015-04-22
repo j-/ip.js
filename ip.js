@@ -4,7 +4,7 @@ function IP (input) {
 	if (!(this instanceof IP)) {
 		return new IP(input);
 	}
-	this.value = IP.parse(input);
+	this.value = IP.parse(input || 0);
 };
 
 var $IP = IP.prototype;
