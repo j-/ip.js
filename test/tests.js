@@ -12,4 +12,6 @@ QUnit.test('IP.parse', function (assert) {
 	// from http://superuser.com/q/486788
 	assert.equal(IP.parse('192.168.072'), IP.parse('192.168.0.072'), 'Missing part');
 	assert.equal(IP.parse('192.168.072'), IP.parse('192.168.0.58'), 'Same value');
+	// from http://superuser.com/q/894303
+	assert.equal(IP.parse('172.016.021.004'), IP.parse('172.14.17.4'), 'Same value');
 });
