@@ -123,6 +123,9 @@ IP.format = function (input, rad) {
 
 IP.formatPart = function (part, rad) {
 	part = IP.parsePart(part);
+	if (part === null) {
+		return null;
+	}
 	rad = IP.parseRadix(rad) || 10;
 	if (rad === 8 || rad === 10 || rad === 16) {
 		return part.toString(rad);
