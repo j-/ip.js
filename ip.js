@@ -37,7 +37,7 @@ IP.MAX_VALUE = 0xffffffff;
  * @memberOf IP
  * @static
  * @param {Number|String|IP} input IP to parse
- * @return {Number} Raw value
+ * @return {?Number} Raw value
  */
 IP.parse = function (input) {
 	if (typeof input === 'number') {
@@ -176,7 +176,7 @@ IP.parseRadix = function (rad) {
  * @static
  * @param {Number|String|IP} input IP to format
  * @param {Number|String} [rad=10] Radix to use
- * @return {String} Formatted IP address
+ * @return {?String} Formatted IP address
  */
 IP.format = function (input, rad) {
 	input = IP.parse(input);
@@ -197,7 +197,7 @@ IP.format = function (input, rad) {
  * @static
  * @param {Number|String} part Part to format
  * @param {Number|String} [rad=10] Radix to use
- * @return {String} Formatted IP part
+ * @return {?String} Formatted IP part
  */
 IP.formatPart = function (part, rad) {
 	part = IP.parsePart(part);
