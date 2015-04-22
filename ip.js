@@ -263,7 +263,7 @@ IP.random = function () {
  * @return {Number} Raw value
  */
 IP.prototype.valueOf = function () {
-	return this.value;
+	return Number(this.value);
 };
 
 /**
