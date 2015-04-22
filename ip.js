@@ -170,6 +170,14 @@ $IP.toString =  $IP.format = function (rad) {
 	return IP.format(this, rad);
 };
 
+$IP.equals = function (other) {
+	return IP.equal(this, other);
+};
+
+$IP.compare = function (other) {
+	return IP.compare(this, other);
+};
+
 this.IP = IP;
 
 })();
