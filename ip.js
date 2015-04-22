@@ -127,8 +127,10 @@ IP.formatPart = function (part, rad) {
 		return null;
 	}
 	rad = IP.parseRadix(rad) || 10;
-	if (rad === 8 || rad === 10 || rad === 16) {
-		return part.toString(rad);
+	switch (rad) {
+		case 8: return '0' + part.toString(8);
+		case 10: return part.toString();
+		case 16: return '0x' + part.toString(16);
 	}
 	return null;
 };
