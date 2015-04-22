@@ -94,6 +94,42 @@ IP.parsePart = function (part) {
 	return result;
 };
 
+IP.parseRadix = function (rad) {
+	if (typeof rad === 'number') {
+		return rad;
+	}
+	rad = String(rad).toLowerCase();
+	var first = rad.charAt(0);
+	switch (first) {
+		case 'o': return 8;
+		case 'd': return 10;
+		case 'h': return 16;
+	}
+	return null;
+};
+
+IP.format = function (input, rad) {
+	input = IP.parse(input);
+	if (isNaN(input) || input === null) {
+		return null;
+	}
+	rad = IP.parseRadix(rad) || 10;
+	var parts = IP.getParts(input).map(function (part) {
+		return IP.formatPart(part, rad);
+	});
+	var result = parts.join('.');
+	return result;
+};
+
+IP.formatPart = function (part, rad) {
+	part = IP.parsePart(part);
+	rad = IP.parseRadix(rad) || 10;
+	if (rad === 8 || rad === 10 || rad === 16) {
+		return part.toString(rad);
+	}
+	return null;
+};
+
 this.IP = IP;
 
 })();
