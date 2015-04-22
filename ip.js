@@ -59,6 +59,10 @@ IP.splitParts = function (input) {
 };
 
 IP.parsePart = function (part) {
+	if (typeof part === 'number') {
+		// pass through
+		return part;
+	}
 	part = String(part).toLowerCase();
 	if (part.charAt(0) === '0') {
 		if (part.charAt(1) === 'x') {
