@@ -12,6 +12,9 @@ IP.parse = function (input) {
 		// pass through
 		return input;
 	}
+	if (input instanceof IP) {
+		return IP.value;
+	}
 	input = String(input);
 	var parts = IP.splitParts(input);
 	var count = parts.length;
