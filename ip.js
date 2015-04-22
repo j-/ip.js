@@ -34,25 +34,25 @@ IP.parse = function (input) {
 			break;
 		// 0.0.0.A
 		case 1:
-			value += IP.parsePart(A) << (8 * 0);
+			value += IP.parsePart(A);
 			break;
 		// A.0.0.B
 		case 2:
-			value += IP.parsePart(A) << (8 * 3);
-			value += IP.parsePart(B) << (8 * 0);
+			value += IP.parsePart(A) * 0x01000000;
+			value += IP.parsePart(B);
 			break;
 		// A.B.0.C
 		case 3:
-			value += IP.parsePart(A) << (8 * 3);
-			value += IP.parsePart(B) << (8 * 2);
-			value += IP.parsePart(C) << (8 * 0);
+			value += IP.parsePart(A) * 0x01000000;
+			value += IP.parsePart(B) * 0x00010000;
+			value += IP.parsePart(C);
 			break;
 		// A.B.C.D
 		case 4:
-			value += IP.parsePart(A) << (8 * 3);
-			value += IP.parsePart(B) << (8 * 2);
-			value += IP.parsePart(C) << (8 * 1);
-			value += IP.parsePart(D) << (8 * 0);
+			value += IP.parsePart(A) * 0x01000000;
+			value += IP.parsePart(B) * 0x00010000;
+			value += IP.parsePart(C) * 0x00000100;
+			value += IP.parsePart(D);
 			break;
 		default:
 			value = null;
