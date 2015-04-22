@@ -130,6 +130,24 @@ IP.formatPart = function (part, rad) {
 	return null;
 };
 
+IP.equal = function (left, right) {
+	left = IP.parse(left);
+	right = IP.parse(right);
+	return left === right;
+};
+
+IP.compare = function (left, right) {
+	left = IP.parse(left);
+	right = IP.parse(right);
+	if (left < right) {
+		return -1;
+	}
+	if (left > right) {
+		return 1;
+	}
+	return 0;
+};
+
 this.IP = IP;
 
 })();
