@@ -1,5 +1,13 @@
 (function () {
 
+/**
+ * IP address constructor. The `new` operator is not required.
+ * @module IP
+ * @constructor
+ * @param {Number|String|IP} [input] Value of this IP
+ * @example
+ *     var localhost = IP('127.0.0.1');
+ */
 function IP (input) {
 	if (!(this instanceof IP)) {
 		return new IP(input);
@@ -7,11 +15,30 @@ function IP (input) {
 	this.value = IP.parse(input || 0);
 };
 
-var $IP = IP.prototype;
-
+/**
+ * The minimum value an IP can have. Represents 0.0.0.0.
+ * @memberOf IP
+ * @static
+ * @type {Number}
+ */
 IP.MIN_VALUE = 0;
+
+/**
+ * The maximum value an IP can have. Represents 255.255.255.255.
+ * @memberOf IP
+ * @static
+ * @type {Number}
+ */
 IP.MAX_VALUE = 0xffffffff;
 
+/**
+ * Parse an IP and get its raw value. Input can be another IP object, a number,
+ *   or a string of one or more IP parts in decimal, hexadecimal or octal base.
+ * @memberOf IP
+ * @static
+ * @param {Number|String|IP} input IP to parse
+ * @return {Number} Raw value
+ */
 IP.parse = function (input) {
 	if (typeof input === 'number') {
 		// pass through
@@ -60,12 +87,26 @@ IP.parse = function (input) {
 	return value;
 };
 
+/**
+ * Split an input string into its parts. Parts are delimited by a period.
+ * @memberOf IP
+ * @static
+ * @param {String} input String to split
+ * @return {String[]} The input string split into parts
+ */
 IP.splitParts = function (input) {
 	input = String(input);
 	var parts = input.split(/\./g);
 	return parts;
 };
 
+/**
+ * Get the four parts of an input IP.
+ * @memberOf IP
+ * @static
+ * @param {Number|String|IP} input IP to process
+ * @return {Number[]} The IP value divided into four parts
+ */
 IP.getParts = function (input) {
 	input = IP.parse(input);
 	return [
@@ -76,6 +117,13 @@ IP.getParts = function (input) {
 	];
 };
 
+/**
+ * Parse the value of a single part of an IP address.
+ * @memberOf IP
+ * @static
+ * @param {Number|String} part Part to parse
+ * @return {Number} The raw value of the given part
+ */
 IP.parsePart = function (part) {
 	if (typeof part === 'number') {
 		// pass through
@@ -99,6 +147,14 @@ IP.parsePart = function (part) {
 	return result;
 };
 
+/**
+ * Parse a given radix. Can be a numeric value or a string representing one of a
+ *   octal, decimal or hexadecimal radix.
+ * @memberOf IP
+ * @static
+ * @param {Number|String} rad Radix
+ * @return {Number} The numeric representation of the given radix
+ */
 IP.parseRadix = function (rad) {
 	if (typeof rad === 'number') {
 		return rad;
@@ -113,6 +169,15 @@ IP.parseRadix = function (rad) {
 	return null;
 };
 
+/**
+ * Takes an input value and an optional radix. Returns the dotted form of that
+ *   IP.
+ * @memberOf IP
+ * @static
+ * @param {Number|String|IP} input IP to format
+ * @param {Number|String} [rad=10] Radix to use
+ * @return {String} Formatted IP address
+ */
 IP.format = function (input, rad) {
 	input = IP.parse(input);
 	if (isNaN(input) || input === null) {
@@ -126,6 +191,14 @@ IP.format = function (input, rad) {
 	return result;
 };
 
+/**
+ * Format only a part of an IP.
+ * @memberOf IP
+ * @static
+ * @param {Number|String} part Part to format
+ * @param {Number|String} [rad=10] Radix to use
+ * @return {String} Formatted IP part
+ */
 IP.formatPart = function (part, rad) {
 	part = IP.parsePart(part);
 	if (part === null) {
@@ -140,12 +213,28 @@ IP.formatPart = function (part, rad) {
 	return null;
 };
 
+/**
+ * Determine if two IPs have the same value.
+ * @memberOf IP
+ * @static
+ * @param {Number|String|IP} left First IP to compare
+ * @param {Number|String|IP} right Second IP to compare
+ * @return {Boolean} The IP addresses are equal
+ */
 IP.equal = function (left, right) {
 	left = IP.parse(left);
 	right = IP.parse(right);
 	return left === right;
 };
 
+/**
+ * Compare the raw values of two IPs.
+ * @memberOf IP
+ * @static
+ * @param {Number|String|IP} left First IP to compare
+ * @param {Number|String|IP} right Second IP to compare
+ * @return {Number} -1 if 'left' is less than 'right', 1 if greater, 0 otherwise
+ */
 IP.compare = function (left, right) {
 	left = IP.parse(left);
 	right = IP.parse(right);
@@ -158,23 +247,62 @@ IP.compare = function (left, right) {
 	return 0;
 };
 
+/**
+ * Generate a random dotted decimal IP address.
+ * @memberOf IP
+ * @static
+ * @return {String} A randomly generated IP
+ */
 IP.random = function () {
 	return IP.format(IP.MAX_VALUE * Math.random());
 };
 
-$IP.valueOf = function () {
+/**
+ * Get the raw value of this IP address.
+ * @memberOf IP
+ * @return {Number} Raw value
+ */
+IP.prototype.valueOf = function () {
 	return this.value;
 };
 
-$IP.toString =  $IP.format = function (rad) {
+/**
+ * Get the string representation of this IP.
+ * @memberOf IP
+ * @param {Number|String} [rad=10] Radix
+ * @return {String} String representation
+ */
+IP.prototype.toString = function (rad) {
+	return this.format(rad);
+};
+
+/**
+ * Format this IP address.
+ * @memberOf IP
+ * @param {Number|String} [rad=10] Optional radix
+ * @return {String} Dotted string
+ */
+IP.prototype.format = function (rad) {
 	return IP.format(this, rad);
 };
 
-$IP.equals = function (other) {
+/**
+ * Determine if this IP address has the same value as another.
+ * @memberOf IP
+ * @param {Number|String|IP} other IP to compare
+ * @return {Boolean} IPs are equal
+ */
+IP.prototype.equals = function (other) {
 	return IP.equal(this, other);
 };
 
-$IP.compare = function (other) {
+/**
+ * Compare the raw value of this IP against another.
+ * @memberOf IP
+ * @param {Number|String|IP} other IP to compare
+ * @return {Number} -1 if this is less than 'other', 1 if greater, 0 otherwise
+ */
+IP.prototype.compare = function (other) {
 	return IP.compare(this, other);
 };
 
