@@ -105,10 +105,13 @@ IP.splitParts = function (input) {
  * @memberOf IP
  * @static
  * @param {Number|String|IP} input IP to process
- * @return {Number[]} The IP value divided into four parts
+ * @return {?Number[]} The IP value divided into four parts
  */
 IP.getParts = function (input) {
 	input = IP.parse(input);
+	if (input === null) {
+		return null;
+	}
 	return [
 		Math.floor(input / 0x01000000) % 0x100,
 		Math.floor(input / 0x00010000) % 0x100,
