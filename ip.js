@@ -158,6 +158,10 @@ IP.compare = function (left, right) {
 	return 0;
 };
 
+IP.random = function () {
+	return IP.format(IP.MAX_VALUE * Math.random());
+};
+
 $IP.valueOf = function () {
 	return this.value;
 };
