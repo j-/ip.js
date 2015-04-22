@@ -9,6 +9,14 @@ function IP (input) {
 
 var $IP = IP.prototype;
 
+IP.MIN = 0;
+IP.MAX = (
+	(0xff << (8 * 3)) +
+	(0xff << (8 * 2)) +
+	(0xff << (8 * 1)) +
+	(0xff << (8 * 0))
+);
+
 IP.parse = function (input) {
 	if (typeof input === 'number') {
 		// pass through
