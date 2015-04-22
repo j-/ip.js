@@ -1,5 +1,20 @@
 QUnit.module('IP');
 
+QUnit.test('IP()', function (assert) {
+	var a = new IP('127.0.0.1');
+	assert.ok(a instanceof IP, 'Can be constructed');
+	var b = IP('127.0.0.1');
+	assert.ok(b instanceof IP, 'Can be constructed without "new" keyword');
+	var c = new IP();
+	assert.equal(c.valueOf(), 0, 'Default value is zero');
+	var d = new IP('0.0.0.0');
+	assert.equal(d.valueOf(), 0, 'Can be initialized with min IP');
+	var e = new IP('255.255.255.255');
+	assert.equal(e.valueOf(), 0xffffffff, 'Can be initialized with max IP');
+	var f = new IP('1.2.3.4.5');
+	assert.equal(f.valueOf(), 0, 'Invalid input will have zero value');
+});
+
 QUnit.test('IP.parse()', function (assert) {
 	var GOOGLE = 1249763844;
 	assert.equal(GOOGLE, IP.parse('74.125.226.4'), 'Dotted decimal');
