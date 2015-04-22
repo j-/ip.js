@@ -69,10 +69,10 @@ IP.splitParts = function (input) {
 IP.getParts = function (input) {
 	input = IP.parse(input);
 	return [
-		(input >> 8 * 3) % 0x100,
-		(input >> 8 * 2) % 0x100,
-		(input >> 8 * 1) % 0x100,
-		(input >> 8 * 0) % 0x100
+		Math.floor(input / 0x01000000) % 0x100,
+		Math.floor(input / 0x00010000) % 0x100,
+		Math.floor(input / 0x00000100) % 0x100,
+		Math.floor(input             ) % 0x100
 	];
 };
 
