@@ -1,6 +1,6 @@
 (function () {
 
-var IP = function (input) {
+function IP (input) {
 	if (!(this instanceof IP)) {
 		return new IP(input);
 	}
