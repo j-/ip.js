@@ -8,6 +8,10 @@ var IP = function (input) {
 };
 
 IP.parse = function (input) {
+	if (typeof input === 'number') {
+		// pass through
+		return input;
+	}
 	input = String(input);
 	var parts = IP.splitParts(input);
 	var count = parts.length;
