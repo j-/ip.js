@@ -7,6 +7,8 @@ function IP (input) {
 	this.value = IP.parse(input);
 };
 
+var $IP = IP.prototype;
+
 IP.parse = function (input) {
 	if (typeof input === 'number') {
 		// pass through
@@ -151,6 +153,14 @@ IP.compare = function (left, right) {
 		return 1;
 	}
 	return 0;
+};
+
+$IP.valueOf = function () {
+	return this.value;
+};
+
+$IP.toString =  $IP.format = function (rad) {
+	return IP.format(this, rad);
 };
 
 this.IP = IP;
