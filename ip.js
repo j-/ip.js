@@ -374,6 +374,24 @@ IP.prototype.format = function (rad) {
 };
 
 /**
+ * Get an IP object representing the next address after this IP.
+ * @memberOf IP
+ * @return {?IP} Next IP address or null if given IP is max value
+ */
+IP.prototype.next = function () {
+	return IP.next(this);
+};
+
+/**
+ * Get an IP object representing the previous address before this IP.
+ * @memberOf IP
+ * @return {?IP} Previous IP address or null if given IP is min value
+ */
+IP.prototype.prev = function () {
+	return IP.prev(this);
+};
+
+/**
  * Determine if this IP address has the same value as another.
  * @memberOf IP
  * @param {Number|String|IP} other IP to compare
