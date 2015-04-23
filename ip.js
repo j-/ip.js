@@ -251,6 +251,58 @@ IP.compare = function (left, right) {
 };
 
 /**
+ * Determine if left IP's value is less than right's.
+ * @memberOf IP
+ * @static
+ * @param {Number|String|IP} other IP to compare
+ * @return {Boolean} True if left IP's value is less than right's
+ */
+IP.lt = function (other) {
+	left = IP.parse(left);
+	right = IP.parse(right);
+	return left < right;
+};
+
+/**
+ * Determine if left IP's value is less than or equal to right's.
+ * @memberOf IP
+ * @static
+ * @param {Number|String|IP} other IP to compare
+ * @return {Boolean} True if left IP's value is less than or equal to right's
+ */
+IP.lte = function (other) {
+	left = IP.parse(left);
+	right = IP.parse(right);
+	return left <= right;
+};
+
+/**
+ * Determine if left IP's value is greater than right's.
+ * @memberOf IP
+ * @static
+ * @param {Number|String|IP} other IP to compare
+ * @return {Boolean} True if left IP's value is greater than right's
+ */
+IP.gt = function (other) {
+	left = IP.parse(left);
+	right = IP.parse(right);
+	return left > right;
+};
+
+/**
+ * Determine if left IP's value is greater than or equal to right's.
+ * @memberOf IP
+ * @static
+ * @param {Number|String|IP} other IP to compare
+ * @return {Boolean} True if left IP's value is greater than or equal to right's
+ */
+IP.gte = function (other) {
+	left = IP.parse(left);
+	right = IP.parse(right);
+	return left >= right;
+};
+
+/**
  * Generate a random dotted decimal IP address.
  * @memberOf IP
  * @static
