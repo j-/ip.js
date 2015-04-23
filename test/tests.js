@@ -17,6 +17,7 @@ QUnit.test('IP()', function (assert) {
 
 QUnit.test('IP.parse()', function (assert) {
 	var GOOGLE = 1249763844;
+	assert.equal(GOOGLE, GOOGLE, 'Numeric value');
 	assert.equal(IP.parse('74.125.226.4'), GOOGLE, 'Dotted decimal');
 	assert.equal(IP.parse('1249763844'), GOOGLE, 'Flat decimal');
 	assert.equal(IP.parse('0112.0175.0342.0004'), GOOGLE, 'Dotted octal');

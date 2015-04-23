@@ -47,7 +47,7 @@ IP.parse = function (input) {
 		return input;
 	}
 	if (input instanceof IP) {
-		return Number(input.value);
+		return Number(input);
 	}
 	if (input === null) {
 		return null;
