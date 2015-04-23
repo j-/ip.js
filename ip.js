@@ -153,6 +153,9 @@ IP.parsePart = function (part) {
 		// dec
 		result = parseInt(part, 10);
 	}
+	if (result < 0) {
+		return null;
+	}
 	return result;
 };
 
