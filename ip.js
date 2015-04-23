@@ -131,6 +131,7 @@ IP.getParts = function (input) {
  * @return {Number} The raw value of the given part
  */
 IP.parsePart = function (part) {
+	var result;
 	if (typeof part === 'number') {
 		// pass through
 		return part;
@@ -293,10 +294,11 @@ IP.compare = function (left, right) {
  * Determine if left IP's value is less than right's.
  * @memberOf IP
  * @static
- * @param {Number|String|IP} other IP to compare
+ * @param {Number|String|IP} left First IP to compare
+ * @param {Number|String|IP} right Second IP to compare
  * @return {Boolean} True if left IP's value is less than right's
  */
-IP.lt = function (other) {
+IP.lt = function (left, right) {
 	left = IP.parse(left);
 	right = IP.parse(right);
 	return left < right;
@@ -306,10 +308,11 @@ IP.lt = function (other) {
  * Determine if left IP's value is less than or equal to right's.
  * @memberOf IP
  * @static
- * @param {Number|String|IP} other IP to compare
+ * @param {Number|String|IP} left First IP to compare
+ * @param {Number|String|IP} right Second IP to compare
  * @return {Boolean} True if left IP's value is less than or equal to right's
  */
-IP.lte = function (other) {
+IP.lte = function (left, right) {
 	left = IP.parse(left);
 	right = IP.parse(right);
 	return left <= right;
@@ -319,10 +322,11 @@ IP.lte = function (other) {
  * Determine if left IP's value is greater than right's.
  * @memberOf IP
  * @static
- * @param {Number|String|IP} other IP to compare
+ * @param {Number|String|IP} left First IP to compare
+ * @param {Number|String|IP} right Second IP to compare
  * @return {Boolean} True if left IP's value is greater than right's
  */
-IP.gt = function (other) {
+IP.gt = function (left, right) {
 	left = IP.parse(left);
 	right = IP.parse(right);
 	return left > right;
@@ -332,10 +336,11 @@ IP.gt = function (other) {
  * Determine if left IP's value is greater than or equal to right's.
  * @memberOf IP
  * @static
- * @param {Number|String|IP} other IP to compare
+ * @param {Number|String|IP} left First IP to compare
+ * @param {Number|String|IP} right Second IP to compare
  * @return {Boolean} True if left IP's value is greater than or equal to right's
  */
-IP.gte = function (other) {
+IP.gte = function (left, right) {
 	left = IP.parse(left);
 	right = IP.parse(right);
 	return left >= right;
