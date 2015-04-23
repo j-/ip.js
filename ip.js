@@ -356,6 +356,19 @@ IP.gte = function (left, right) {
 };
 
 /**
+ * Get the inverse IP of a given IP. All 1 bits are switched off and vice-versa.
+ * @memberOf IP
+ * @static
+ * @param {Number|String|IP} ip Address to invert
+ * @return {?IP} Inverse IP
+ */
+IP.not = function (ip) {
+	ip = IP.parse(ip);
+	var inverse = new IP(IP.MAX_VALUE ^ ip);
+	return inverse;
+};
+
+/**
  * Generate a random dotted decimal IP address.
  * @memberOf IP
  * @static
