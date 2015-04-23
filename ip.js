@@ -217,6 +217,38 @@ IP.formatPart = function (part, rad) {
 };
 
 /**
+ * Get an IP object representing the next address after the given IP.
+ * @memberOf IP
+ * @static
+ * @param {Number|String|IP} ip Address to operate on
+ * @return {?IP} Next IP address or null if given IP is max value
+ */
+IP.next = function (ip) {
+	var value = IP.parse(ip);
+	if (value >= IP.MAX_VALUE) {
+		return null;
+	}
+	var next = new IP(value + 1);
+	return next;
+};
+
+/**
+ * Get an IP object representing the previous address before the given IP.
+ * @memberOf IP
+ * @static
+ * @param {Number|String|IP} ip Address to operate on
+ * @return {?IP} Previous IP address or null if given IP is min value
+ */
+IP.prev = function (ip) {
+	var value = IP.parse(ip);
+	if (value <= IP.MIN_VALUE) {
+		return null;
+	}
+	var prev = new IP(value - 1);
+	return prev;
+};
+
+/**
  * Determine if two IPs have the same value.
  * @memberOf IP
  * @static

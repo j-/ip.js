@@ -68,3 +68,17 @@ QUnit.test('IP.random()', function (assert) {
 		assert.notEqual(IP.parse(rand), null, 'Result must be valid');
 	}
 });
+
+QUnit.test('IP.next()', function (assert) {
+	assert.ok(IP.next(0) instanceof IP, 'Returns IP instance');
+	assert.equal(IP.next(0).valueOf(), 1, 'Increments the IP value');
+	assert.ok(IP.equal(IP.next('192.168.0.255'), '192.168.1.0'), 'Rollover IP value');
+	assert.notEqual(IP.parse(IP.next(IP.MAX_VALUE)), IP.MAX_VALUE + 1, 'Does not go beyond max value');
+});
+
+QUnit.test('IP.prev()', function (assert) {
+	assert.ok(IP.prev(1) instanceof IP, 'Returns IP instance');
+	assert.equal(IP.prev(1).valueOf(), 0, 'Decrement the IP value');
+	assert.ok(IP.equal(IP.prev('192.168.1.0'), '192.168.0.255'), 'Rollback IP value');
+	assert.notEqual(IP.parse(IP.prev(IP.MIN_VALUE)), IP.MIN_VALUE - 1, 'Does not go below min value');
+});
