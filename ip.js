@@ -138,9 +138,9 @@ IP.parsePart = function (part) {
 		// pass through
 		return part;
 	}
-	part = String(part).toLowerCase();
+	part = String(part);
 	if (part.charAt(0) === '0') {
-		if (part.charAt(1) === 'x') {
+		if (part.charAt(1).toLowerCase() === 'x') {
 			// hex
 			result = parseInt(part, 16);
 		}
