@@ -496,6 +496,15 @@ IP.prototype.gte = function (other) {
 	return IP.gte(this, other);
 };
 
+/**
+ * Get the inverse IP of this IP. All 1 bits are switched off and vice-versa.
+ * @memberOf IP
+ * @return {?IP} Inverse IP
+ */
+IP.prototype.not = function () {
+	return IP.not(this);
+};
+
 root.IP = IP;
 
 })(this);
