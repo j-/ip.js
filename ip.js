@@ -156,7 +156,7 @@ IP.parsePart = function (part) {
  * @memberOf IP
  * @static
  * @param {Number|String} rad Radix
- * @return {Number} The numeric representation of the given radix
+ * @return {?Number} The numeric representation of the given radix
  */
 IP.parseRadix = function (rad) {
 	if (typeof rad === 'number') {
