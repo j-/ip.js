@@ -48,7 +48,7 @@ IP.MAX_VALUE = 0xffffffff;
 IP.parse = function (input) {
 	if (typeof input === 'number') {
 		// pass through
-		return input;
+		return Math.floor(input);
 	}
 	if (input instanceof IP) {
 		return Number(input);
