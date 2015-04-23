@@ -414,7 +414,6 @@ IP.prototype.compare = function (other) {
 /**
  * Determine if this IP's value is less than another.
  * @memberOf IP
- * @static
  * @param {Number|String|IP} other IP to compare
  * @return {Boolean} True if this IP's value is less than the other
  */
@@ -425,7 +424,6 @@ IP.prototype.lt = function (other) {
 /**
  * Determine if this IP's value is less than or equal to another.
  * @memberOf IP
- * @static
  * @param {Number|String|IP} other IP to compare
  * @return {Boolean} True if this IP's value is less than or equal to the other
  */
@@ -436,7 +434,6 @@ IP.prototype.lte = function (other) {
 /**
  * Determine if this IP's value is greater than another.
  * @memberOf IP
- * @static
  * @param {Number|String|IP} other IP to compare
  * @return {Boolean} True if this IP's value is greater than the other
  */
@@ -447,7 +444,6 @@ IP.prototype.gt = function (other) {
 /**
  * Determine if this IP's value is greater than or equal to another.
  * @memberOf IP
- * @static
  * @param {Number|String|IP} other IP to compare
  * @return {Boolean} True if this IP's value is greater than or equal to the
  *   other
