@@ -8,7 +8,7 @@
  * @example
  *     var localhost = IP('127.0.0.1');
  */
-function IP (input) {
+var IP = function IP (input) {
 	if (!(this instanceof IP)) {
 		return new IP(input);
 	}
