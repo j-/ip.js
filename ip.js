@@ -84,6 +84,9 @@ IP.parse = function (input) {
 		default:
 			value = null;
 	}
+	if (value > IP.MAX_VALUE || value < IP.MIN_VALUE) {
+		return null;
+	}
 	return value;
 };
 
