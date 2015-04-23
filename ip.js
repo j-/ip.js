@@ -379,6 +379,30 @@ IP.random = function () {
 };
 
 /**
+ * Get the address class of an IP.
+ * @memberOf IP
+ * @static
+ * @param {Number|String|IP} ip IP address
+ * @return {String} The address class
+ */
+IP.getClass = function (ip) {
+	ip = IP.parse(ip);
+	if ((ip & 0x80000000) === 0) {
+		return 'A';
+	}
+	if ((ip & 0x40000000) === 0) {
+		return 'B';
+	}
+	if ((ip & 0x20000000) === 0) {
+		return 'C';
+	}
+	if ((ip & 0x10000000) === 0) {
+		return 'D';
+	}
+	return 'E';
+};
+
+/**
  * Get the raw value of this IP address.
  * @memberOf IP
  * @return {Number} Raw value
