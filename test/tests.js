@@ -65,13 +65,13 @@ QUnit.test('IP.parseRadix()', function (assert) {
 
 QUnit.test('IP.format()', function (assert) {
 	var GOOGLE = '74.125.226.4';
-	assert.equal(GOOGLE, IP.format('74.125.226.4'), 'Dotted decimal');
-	assert.equal(GOOGLE, IP.format('1249763844'), 'Flat decimal');
-	assert.equal(GOOGLE, IP.format('0112.0175.0342.0004'), 'Dotted octal');
-	assert.equal(GOOGLE, IP.format('011237361004'), 'Flat octal');
-	assert.equal(GOOGLE, IP.format('0x4A.0x7D.0xE2.0x04'), 'Dotted hexadecimal');
-	assert.equal(GOOGLE, IP.format('0x4A7DE204'), 'Flat hexadecimal');
-	assert.equal(GOOGLE, IP.format('74.0175.0xe2.4'), 'Dotted mixed');
+	assert.equal(IP.format('74.125.226.4'), GOOGLE, 'Dotted decimal');
+	assert.equal(IP.format('1249763844'), GOOGLE, 'Flat decimal');
+	assert.equal(IP.format('0112.0175.0342.0004'), GOOGLE, 'Dotted octal');
+	assert.equal(IP.format('011237361004'), GOOGLE, 'Flat octal');
+	assert.equal(IP.format('0x4A.0x7D.0xE2.0x04'), GOOGLE, 'Dotted hexadecimal');
+	assert.equal(IP.format('0x4A7DE204'), GOOGLE, 'Flat hexadecimal');
+	assert.equal(IP.format('74.0175.0xe2.4'), GOOGLE, 'Dotted mixed');
 	assert.equal(IP.format(GOOGLE, 16).toLowerCase(), '0x4a.0x7d.0xe2.0x4', 'Can format hexadecimal');
 	assert.equal(IP.format(GOOGLE, 8), '0112.0175.0342.04', 'Can format octal');
 });
