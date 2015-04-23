@@ -140,7 +140,8 @@ IP.parsePart = function (part) {
 	}
 	part = String(part);
 	if (part.charAt(0) === '0') {
-		if (part.charAt(1).toLowerCase() === 'x') {
+		var ch = part.charAt(1);
+		if (ch === 'x' || ch === 'X') {
 			// hex
 			result = parseInt(part, 16);
 		}
