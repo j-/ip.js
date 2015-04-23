@@ -101,7 +101,7 @@ IP.parse = function (input) {
  */
 IP.splitParts = function (input) {
 	input = String(input);
-	var parts = input.split(/\./g);
+	var parts = input.split('.');
 	return parts;
 };
 
