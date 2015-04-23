@@ -1,4 +1,6 @@
-(function () {
+(function (root) {
+
+'use strict';
 
 /**
  * IP address constructor. The `new` operator is not required.
@@ -474,6 +476,6 @@ IP.prototype.gte = function (other) {
 	return IP.gte(this, other);
 };
 
-this.IP = IP;
+root.IP = IP;
 
-})();
+})(this);
