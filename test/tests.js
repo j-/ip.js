@@ -31,6 +31,25 @@ QUnit.test('IP.parse()', function (assert) {
 	assert.equal(IP.parse('172.016.021.004'), IP.parse('172.14.17.4'), 'Same value');
 });
 
+QUnit.test('IP.parseRadix()', function (assert) {
+	assert.equal(IP.parseRadix(8), 8, 'Octal from 8');
+	assert.equal(IP.parseRadix(10), 10, 'Decimal from 10');
+	assert.equal(IP.parseRadix(16), 16, 'Hexadecimal from 16');
+	assert.equal(IP.parseRadix('8'), 8, 'Octal from "8"');
+	assert.equal(IP.parseRadix('10'), 10, 'Decimal from "10"');
+	assert.equal(IP.parseRadix('16'), 16, 'Hexadecimal from "16"');
+	assert.equal(IP.parseRadix('oct'), 8, 'Octal from "oct"');
+	assert.equal(IP.parseRadix('dec'), 10, 'Decimal from "dec"');
+	assert.equal(IP.parseRadix('hex'), 16, 'Hexadecimal from "hex"');
+	assert.equal(IP.parseRadix(undefined), null, 'No value from undefined');
+	assert.equal(IP.parseRadix(null), null, 'No value from null');
+	assert.equal(IP.parseRadix(''), null, 'No value from ""');
+	assert.equal(IP.parseRadix(1), null, 'No value from 1');
+	assert.equal(IP.parseRadix(2), null, 'No value from 2');
+	assert.equal(IP.parseRadix(7), null, 'No value from 7');
+	assert.equal(IP.parseRadix(100), null, 'No value from 100');
+});
+
 QUnit.test('IP.format()', function (assert) {
 	var GOOGLE = '74.125.226.4';
 	assert.equal(GOOGLE, IP.format('74.125.226.4'), 'Dotted decimal');
