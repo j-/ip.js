@@ -31,6 +31,19 @@ QUnit.test('IP.parse()', function (assert) {
 	assert.equal(IP.parse('172.016.021.004'), IP.parse('172.14.17.4'), 'Same value');
 });
 
+QUnit.test('IP.parsePart()', function (assert) {
+	assert.equal(IP.parsePart(0), 0, 'Parse 0');
+	assert.equal(IP.parsePart('0'), '0', 'Parse "0"');
+	assert.equal(IP.parsePart('0x0'), '0x0', 'Parse "0x0"');
+	assert.equal(IP.parsePart('00'), '00', 'Parse "00"');
+	assert.equal(IP.parsePart(255), 255, 'Parse 255');
+	assert.equal(IP.parsePart('255'), 255, 'Parse "255"');
+	assert.equal(IP.parsePart('0xFF'), 255, 'Parse "0xFF"');
+	assert.equal(IP.parsePart('0377'), 255, 'Parse "0377"');
+	assert.equal(IP.parsePart('0xffffffff'), 0xffffffff, 'Parse 0xffffffff');
+	assert.equal(IP.parsePart('-1'), null, 'Do not parse "-1"');
+});
+
 QUnit.test('IP.parseRadix()', function (assert) {
 	assert.equal(IP.parseRadix(8), 8, 'Octal from 8');
 	assert.equal(IP.parseRadix(10), 10, 'Decimal from 10');
