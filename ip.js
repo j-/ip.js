@@ -361,6 +361,51 @@ IP.prototype.compare = function (other) {
 	return IP.compare(this, other);
 };
 
+/**
+ * Determine if this IP's value is less than another.
+ * @memberOf IP
+ * @static
+ * @param {Number|String|IP} other IP to compare
+ * @return {Boolean} True if this IP's value is less than the other
+ */
+IP.prototype.lt = function (other) {
+	return IP.lt(this, other);
+};
+
+/**
+ * Determine if this IP's value is less than or equal to another.
+ * @memberOf IP
+ * @static
+ * @param {Number|String|IP} other IP to compare
+ * @return {Boolean} True if this IP's value is less than or equal to the other
+ */
+IP.prototype.lte = function (other) {
+	return IP.lte(this, other);
+};
+
+/**
+ * Determine if this IP's value is greater than another.
+ * @memberOf IP
+ * @static
+ * @param {Number|String|IP} other IP to compare
+ * @return {Boolean} True if this IP's value is greater than the other
+ */
+IP.prototype.gt = function (other) {
+	return IP.gt(this, other);
+};
+
+/**
+ * Determine if this IP's value is greater than or equal to another.
+ * @memberOf IP
+ * @static
+ * @param {Number|String|IP} other IP to compare
+ * @return {Boolean} True if this IP's value is greater than or equal to the
+ *   other
+ */
+IP.prototype.gte = function (other) {
+	return IP.gte(this, other);
+};
+
 this.IP = IP;
 
 })();
