@@ -159,8 +159,12 @@ IP.parsePart = function (part) {
  * @return {?Number} The numeric representation of the given radix
  */
 IP.parseRadix = function (rad) {
-	if (typeof rad === 'number') {
-		return rad;
+	var numRad = Number(rad);
+	if (!isNaN(numRad)) {
+		if (numRad == 8 || numRad === 10 || numRad === 16) {
+			return numRad;
+		}
+		return null;
 	}
 	rad = String(rad).toLowerCase();
 	var first = rad.charAt(0);
