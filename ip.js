@@ -352,6 +352,11 @@ IP.random = function () {
  * Get the raw value of this IP address.
  * @memberOf IP
  * @return {Number} Raw value
+ * @example
+ *
+ * var localhost = new IP('127.0.0.1');
+ * localhost.valueOf(); // 2130706433
+ * Number(localhost);   // 2130706433
  */
 IP.prototype.valueOf = function () {
 	return Number(this.value);
@@ -362,6 +367,11 @@ IP.prototype.valueOf = function () {
  * @memberOf IP
  * @param {Number|String} [rad=10] Radix
  * @return {String} String representation
+ * @example
+ *
+ * var localhost = new IP(0x7f000001);
+ * localhost.toString(); // "127.0.0.1"
+ * String(localhost);    // "127.0.0.1"
  */
 IP.prototype.toString = function (rad) {
 	return this.format(rad);
