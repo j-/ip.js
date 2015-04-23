@@ -83,7 +83,7 @@ IP.parse = function (input) {
 			value += IP.parsePart(parts[3]);
 			break;
 		default:
-			value = null;
+			return null;
 	}
 	if (value > IP.MAX_VALUE || value < IP.MIN_VALUE) {
 		return null;
