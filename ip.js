@@ -3,12 +3,16 @@
 'use strict';
 
 /**
- * IP address constructor. The `new` operator is not required.
+ * IP address constructor. Can be given a number, another IP object, or a dotted
+ *   or flat string in octal, decimal or hexadecimal formats.
  * @module IP
  * @constructor
- * @param {Number|String|IP} [input] Value of this IP
+ * @param {Number|String|IP} [input=0] Value of this IP
  * @example
- *     var localhost = IP('127.0.0.1');
+ *
+ * var localhost = IP('127.0.0.1');     // 'new' not required
+ * var dns = new IP('010.010.010.010'); // input can be in base 8, 10 or 16
+ * var mask = new IP(0xffffff00);       // input can also be a number
  */
 var IP = function IP (input) {
 	if (!(this instanceof IP)) {
