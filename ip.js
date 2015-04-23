@@ -56,32 +56,31 @@ IP.parse = function (input) {
 	var parts = IP.splitParts(input);
 	var count = parts.length;
 	var value = 0;
-	var A = parts[0], B = parts[1], C = parts[2], D = parts[3];
 	switch (count) {
 		// 0.0.0.0
 		case 0:
 			break;
 		// 0.0.0.A
 		case 1:
-			value += IP.parsePart(A);
+			value += IP.parsePart(parts[0]);
 			break;
 		// A.0.0.B
 		case 2:
-			value += IP.parsePart(A) * 0x01000000;
-			value += IP.parsePart(B);
+			value += IP.parsePart(parts[0]) * 0x01000000;
+			value += IP.parsePart(parts[1]);
 			break;
 		// A.B.0.C
 		case 3:
-			value += IP.parsePart(A) * 0x01000000;
-			value += IP.parsePart(B) * 0x00010000;
-			value += IP.parsePart(C);
+			value += IP.parsePart(parts[0]) * 0x01000000;
+			value += IP.parsePart(parts[1]) * 0x00010000;
+			value += IP.parsePart(parts[2]);
 			break;
 		// A.B.C.D
 		case 4:
-			value += IP.parsePart(A) * 0x01000000;
-			value += IP.parsePart(B) * 0x00010000;
-			value += IP.parsePart(C) * 0x00000100;
-			value += IP.parsePart(D);
+			value += IP.parsePart(parts[0]) * 0x01000000;
+			value += IP.parsePart(parts[1]) * 0x00010000;
+			value += IP.parsePart(parts[2]) * 0x00000100;
+			value += IP.parsePart(parts[3]);
 			break;
 		default:
 			value = null;
