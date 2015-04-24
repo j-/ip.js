@@ -1,3 +1,4 @@
+/*! ip.js - Jamie Hoeks */
 (function (root) {
 
 'use strict';
