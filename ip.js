@@ -1,5 +1,15 @@
 /*! ip.js - Jamie Hoeks */
-(function (root) {
+;(function (root, factory) {
+	if (typeof define === 'function' && define.amd) {
+		define('ip', [], factory);
+	}
+	else if (typeof exports === 'object') {
+		module.exports = factory();
+	}
+	else {
+		root.IP = factory();
+	}
+}(this, function () {
 
 'use strict';
 
@@ -530,6 +540,6 @@ IP.prototype.not = function () {
 	return IP.not(this);
 };
 
-root.IP = IP;
+return IP;
 
-})(this);
+}));
