@@ -430,9 +430,9 @@ IP.getClass = function (ip) {
  * @return {String} True if input is a valid IP address
  */
 IP.isValid = function (input) {
-	ip = IP.parse(ip);
-	var value = ip.valueOf();
-	var valid = value === null && !isNaN(value);
+	input = IP.parse(input);
+	var value = input.valueOf();
+	var valid = value !== null && !isNaN(value);
 	return valid;
 };
 
