@@ -144,14 +144,14 @@ IP.getParts = function (input) {
  * Parse the value of a single part of an IP address.
  * @memberOf IP
  * @static
- * @param {Number|String} part Part to parse
+ * @param {Number|String|IP} part Part to parse
  * @return {Number} The raw value of the given part
  */
 IP.parsePart = function (part) {
 	var result;
-	if (typeof part === 'number') {
+	if (typeof part === 'number' || part instanceof IP) {
 		// pass through
-		return part;
+		return Number(part);
 	}
 	part = String(part);
 	if (part.charAt(0) === '0') {
