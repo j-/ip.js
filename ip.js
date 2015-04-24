@@ -423,6 +423,20 @@ IP.getClass = function (ip) {
 };
 
 /**
+ * Determine if an input is a valid IP address
+ * @memberOf IP
+ * @static
+ * @param {Number|String|IP} input IP address
+ * @return {String} True if input is a valid IP address
+ */
+IP.isValid = function (input) {
+	ip = IP.parse(ip);
+	var value = ip.valueOf();
+	var valid = value === null && !isNaN(value);
+	return valid;
+};
+
+/**
  * Get the raw value of this IP address.
  * @memberOf IP
  * @return {Number} Raw value
