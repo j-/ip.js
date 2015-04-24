@@ -570,26 +570,26 @@ var Mask = IP.Mask = function Mask (input) {
 
 /**
  * The minimum value a mask can have. Represents no bits masked.
- * @memberOf IP
+ * @memberOf Mask
  * @static
  * @type {Number}
  */
 Mask.MIN_VALUE = 0;
 
 /**
- * The maximum value an IP can have. Represents all bits masked.
- * @memberOf IP
+ * The maximum value a mask can have. Represents all bits masked.
+ * @memberOf Mask
  * @static
  * @type {Number}
  */
 Mask.MAX_VALUE = 0x20;
 
 /**
- * Parse a mask and get its raw value. Input can be another IP object, a number,
- *   or a string of one or more IP parts in decimal, hexadecimal or octal base.
- * @memberOf IP
+ * Parse a mask and get its raw value. Input can be a Mask object, a number,
+ *   or an IP-like value.
+ * @memberOf Mask
  * @static
- * @param {Number|String|IP} input IP to parse
+ * @param {Number|String|IP|Mask} input Mask to parse
  * @return {?Number} Raw value
  */
 Mask.parse = function (input) {
