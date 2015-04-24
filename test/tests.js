@@ -115,3 +115,40 @@ QUnit.test('IP.prev()', function (assert) {
 	assert.ok(IP.equal(IP.prev('192.168.1.0'), '192.168.0.255'), 'Rollback IP value');
 	assert.notEqual(IP.parse(IP.prev(IP.MIN_VALUE)), IP.MIN_VALUE - 1, 'Does not go below min value');
 });
+
+QUnit.test('IP.not()', function (assert) {
+	var a = function (x) { return Number(IP.not(parseInt(x, 2))).toString(2); };
+	var b = function (x) { return parseInt(x, 2).toString(2); };
+	assert.equal(
+		a('00000000000000000000000000000000'),
+		b('11111111111111111111111111111111')
+	);
+	assert.equal(
+		a('11111111111111111111111111111111'),
+		b('00000000000000000000000000000000')
+	);
+	assert.equal(
+		a('10101010101010101010101010101010'),
+		b('01010101010101010101010101010101')
+	);
+	assert.equal(
+		a('01010101010101010101010101010101'),
+		b('10101010101010101010101010101010')
+	);
+	assert.equal(
+		a('11111111000000000000000000000000'),
+		b('00000000111111111111111111111111')
+	);
+	assert.equal(
+		a('00000000111111111111111111111111'),
+		b('11111111000000000000000000000000')
+	);
+	assert.equal(
+		a('01111111111111111111111111111111'),
+		b('10000000000000000000000000000000')
+	);
+	assert.equal(
+		a('10000000000000000000000000000000'),
+		b('01111111111111111111111111111111')
+	);
+});

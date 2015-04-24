@@ -375,7 +375,13 @@ IP.gte = function (left, right) {
  */
 IP.not = function (ip) {
 	ip = IP.parse(ip);
-	var inverse = new IP(IP.MAX_VALUE ^ ip);
+	var parts = IP.getParts(ip);
+	var result = parts.reduce(function (total, part) {
+		total *= 0x100;
+		total += ~part & 0xff;
+		return total;
+	}, 0);
+	var inverse = new IP(result);
 	return inverse;
 };
 
