@@ -564,6 +564,15 @@ IP.prototype.not = function () {
 };
 
 /**
+ * Determine if the value of this IP address is valid.
+ * @memberOf IP
+ * @return {Boolean} True if valid
+ */
+IP.prototype.isValid = function () {
+	return IP.isValid(this);
+};
+
+/**
  * IP address mask constructor. Can be given a number, an IP object, another
  *   Mask object, an IP-like string or a numeric string. Will default to no
  *   value (i.e. mask zero bits).
