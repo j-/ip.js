@@ -558,8 +558,9 @@ IP.prototype.not = function () {
  * @param {Number|String|IP|Mask} [input=0] Mask value
  * @example
  *
- * var subnet = Mask('255.255.255.0');
- * var loopback = Mask('127.0.0.0/8');
+ * var subnet = Mask('255.255.255.0');     // 'new' not required
+ * var loopback = new Mask('127.0.0.0/8'); // input can be an IP/mask pair
+ * var first24 = new Mask(24);             // input can be a number
  */
 var Mask = IP.Mask = function Mask (input) {
 	if (!(this instanceof Mask)) {
@@ -609,6 +610,51 @@ Mask.parse = function (input) {
 	var bits = Math.ceil(Math.log(inverse + 1) / Math.LN2);
 	var value = Mask.MAX_VALUE - bits;
 	return value;
+};
+
+/**
+ * Get the formatted string for a given mask in dotted decimal form.
+ * @memberOf Mask
+ * @param {Number|String|IP|Mask} input Mask to parse
+ * @return {?Number} Formatted mask
+ */
+Mask.format = function (input) {
+	input = Mask.parse(input);
+	if (isNaN(input) || input === null) {
+		return null;
+	}
+	var bits = Mask.MAX_VALUE - input;
+	var value = Math.pow(2, bits) - 1;
+	var inverse = IP.not(value);
+	var formatted = IP.format(inverse);
+	return formatted;
+};
+
+/**
+ * Get the raw value of this mask.
+ * @memberOf Mask
+ * @return {Number} Raw value
+ */
+Mask.prototype.valueOf = function () {
+	return Number(this.value);
+};
+
+/**
+ * Get the string representation of this mask.
+ * @memberOf Mask
+ * @return {?String} String representation
+ */
+Mask.prototype.toString = function () {
+	return this.format();
+};
+
+/**
+ * Format this IP mask.
+ * @memberOf Mask
+ * @return {?String} Dotted decimal
+ */
+Mask.prototype.format = function () {
+	return Mask.format(this);
 };
 
 return IP;
