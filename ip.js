@@ -546,6 +546,68 @@ IP.prototype.not = function () {
 	return IP.not(this);
 };
 
+/**
+ * IP address mask constructor. Can be given a number, an IP object, another
+ *   Mask object, an IP-like string or a numeric string. Will default to no
+ *   value (i.e. mask zero bits).
+ * @module Mask
+ * @constructor
+ * @param {Number|String|IP|Mask} [input=0] Mask value
+ * @example
+ *
+ * var subnet = Mask('255.255.255.0');
+ * var loopback = Mask('127.0.0.0/8');
+ */
+var Mask = IP.Mask = function Mask (input) {
+	if (!(this instanceof Mask)) {
+		return new Mask(input);
+	}
+	this.value = Mask.parse(input || 0);
+};
+
+/**
+ * The minimum value a mask can have. Represents no bits masked.
+ * @memberOf IP
+ * @static
+ * @type {Number}
+ */
+Mask.MIN_VALUE = 0;
+
+/**
+ * The maximum value an IP can have. Represents all bits masked.
+ * @memberOf IP
+ * @static
+ * @type {Number}
+ */
+Mask.MAX_VALUE = 0x20;
+
+/**
+ * Parse a mask and get its raw value. Input can be another IP object, a number,
+ *   or a string of one or more IP parts in decimal, hexadecimal or octal base.
+ * @memberOf IP
+ * @static
+ * @param {Number|String|IP} input IP to parse
+ * @return {?Number} Raw value
+ */
+Mask.parse = function (input) {
+	if (input === null) {
+		return null;
+	}
+	if (!isNaN(input) && input <= Mask.MAX_VALUE) {
+		return Number(input);
+	}
+	input = String(input);
+	var slashIndex = input.indexOf('/');
+	if (slashIndex > -1) {
+		input = input.substring(slashIndex + 1);
+		return Mask.parse(input);
+	}
+	var inverse = IP.not(input);
+	var bits = Math.ceil(Math.log(inverse + 1) / Math.LN2);
+	var value = Mask.MAX_VALUE - bits;
+	return value;
+};
+
 return IP;
 
 }));
