@@ -1,4 +1,5 @@
 /*! ip.js - Jamie Hoeks */
+/* global define, module, exports */
 ;(function (root, factory) {
 	if (typeof define === 'function' && define.amd) {
 		define('ip', [], factory);
@@ -374,6 +375,7 @@ IP.gte = function (left, right) {
  * @return {?IP} Inverse IP
  */
 IP.not = function (ip) {
+	// jshint bitwise:false
 	ip = IP.parse(ip);
 	var parts = IP.getParts(ip);
 	var result = parts.reduce(function (total, part) {
@@ -403,6 +405,7 @@ IP.random = function () {
  * @return {String} The address class
  */
 IP.getClass = function (ip) {
+	// jshint bitwise:false
 	ip = IP.parse(ip);
 	if ((ip & 0x80000000) === 0) {
 		return 'A';
