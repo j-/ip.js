@@ -58,53 +58,52 @@ IP.MAX_VALUE = 0xffffffff;
  * @return {?Number} Raw value
  */
 IP.parse = function (input) {
+	var value, parts, count;
 	if (typeof input === 'number') {
-		// pass through
-		return Math.floor(input);
+		value = input;
 	}
-	if (input instanceof IP) {
-		return Number(input);
+	else if (input instanceof IP) {
+		value = input.value;
 	}
-	if (input === null) {
+	else {
+		value = 0;
+		input = String(input);
+		parts = IP.splitParts(input);
+		count = parts.length;
+		switch (count) {
+			// 0.0.0.0
+			case 0:
+				break;
+			// 0.0.0.A
+			case 1:
+				value += IP.parsePart(parts[0]);
+				break;
+			// A.0.0.B
+			case 2:
+				value += IP.parsePart(parts[0]) * 0x01000000;
+				value += IP.parsePart(parts[1]);
+				break;
+			// A.B.0.C
+			case 3:
+				value += IP.parsePart(parts[0]) * 0x01000000;
+				value += IP.parsePart(parts[1]) * 0x00010000;
+				value += IP.parsePart(parts[2]);
+				break;
+			// A.B.C.D
+			case 4:
+				value += IP.parsePart(parts[0]) * 0x01000000;
+				value += IP.parsePart(parts[1]) * 0x00010000;
+				value += IP.parsePart(parts[2]) * 0x00000100;
+				value += IP.parsePart(parts[3]);
+				break;
+			default:
+				return null;
+		}
+	}
+	if (value === null || value > IP.MAX_VALUE || value < IP.MIN_VALUE) {
 		return null;
 	}
-	input = String(input);
-	var parts = IP.splitParts(input);
-	var count = parts.length;
-	var value = 0;
-	switch (count) {
-		// 0.0.0.0
-		case 0:
-			break;
-		// 0.0.0.A
-		case 1:
-			value += IP.parsePart(parts[0]);
-			break;
-		// A.0.0.B
-		case 2:
-			value += IP.parsePart(parts[0]) * 0x01000000;
-			value += IP.parsePart(parts[1]);
-			break;
-		// A.B.0.C
-		case 3:
-			value += IP.parsePart(parts[0]) * 0x01000000;
-			value += IP.parsePart(parts[1]) * 0x00010000;
-			value += IP.parsePart(parts[2]);
-			break;
-		// A.B.C.D
-		case 4:
-			value += IP.parsePart(parts[0]) * 0x01000000;
-			value += IP.parsePart(parts[1]) * 0x00010000;
-			value += IP.parsePart(parts[2]) * 0x00000100;
-			value += IP.parsePart(parts[3]);
-			break;
-		default:
-			return null;
-	}
-	if (value > IP.MAX_VALUE || value < IP.MIN_VALUE) {
-		return null;
-	}
-	return value;
+	return Math.floor(value);
 };
 
 /**
