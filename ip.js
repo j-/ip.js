@@ -693,6 +693,16 @@ Mask.prototype.format = function () {
 	return Mask.format(this);
 };
 
+/**
+ * Determine if this mask has the same value as another.
+ * @memberOf Mask
+ * @param {Number|String|IP|Mask} other Mask to compare
+ * @return {Boolean} Masks are equal
+ */
+Mask.prototype.equals = function (other) {
+	return Mask.equal(this, other);
+};
+
 return IP;
 
 }));
