@@ -107,6 +107,19 @@ IP.parse = function (input) {
 };
 
 /**
+ * Determine if an IP part is valid. A valid part is a numeric value greater
+ *   than 0.
+ * @memberOf IP
+ * @static
+ * @param {String} part Part to test
+ * @return {Boolean} The part is valid
+ */
+IP.partIsValid = function (part) {
+	var valid = !(part === null || isNaN(part) || part < 0);
+	return valid;
+};
+
+/**
  * Split an input string into its parts. Parts are delimited by a period.
  * @memberOf IP
  * @static
