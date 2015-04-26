@@ -69,6 +69,9 @@ IP.parse = function (input) {
 		value = 0;
 		input = String(input);
 		parts = IP.splitParts(input);
+		if (parts === null) {
+			return null;
+		}
 		count = parts.length;
 		switch (count) {
 			// 0.0.0.0
@@ -124,11 +127,17 @@ IP.partIsValid = function (part) {
  * @memberOf IP
  * @static
  * @param {String} input String to split
- * @return {String[]} The input string split into parts
+ * @return {?String[]} The input string split into parts. Null if any part is
+ *   invalid.
  */
 IP.splitParts = function (input) {
 	input = String(input);
 	var parts = input.split('.');
+	for (var i = 0, l = parts.length; i < l; i++) {
+		if (!IP.partIsValid(parts[i])) {
+			return null;
+		}
+	}
 	return parts;
 };
 
