@@ -653,6 +653,20 @@ Mask.format = function (input) {
 };
 
 /**
+ * Determine if two masks have the same value.
+ * @memberOf Mask
+ * @static
+ * @param {Number|String|IP|Mask} left First mask to compare
+ * @param {Number|String|IP|Mask} right Second mask to compare
+ * @return {Boolean} The masks are equal
+ */
+Mask.equal = function (left, right) {
+	left = Mask.parse(left);
+	right = Mask.parse(right);
+	return left === right;
+};
+
+/**
  * Get the raw value of this mask.
  * @memberOf Mask
  * @return {Number} Raw value
