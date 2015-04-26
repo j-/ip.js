@@ -58,7 +58,7 @@ IP.MAX_VALUE = 0xffffffff;
  * @return {?Number} Raw value
  */
 IP.parse = function (input) {
-	var value, parts, count;
+	var value, parts, invalid;
 	if (typeof input === 'number') {
 		value = input;
 	}
@@ -66,47 +66,60 @@ IP.parse = function (input) {
 		value = input.value;
 	}
 	else {
-		value = 0;
 		input = String(input);
 		parts = IP.splitParts(input);
-		if (parts === null) {
+		value = IP.addParts(parts);
+	}
+	invalid = (
+		value === null ||
+		isNaN(value) ||
+		value > IP.MAX_VALUE ||
+		value < IP.MIN_VALUE
+	);
+	return invalid ? null : Math.floor(value);
+};
+
+/**
+ * Add the parts of an IP address. Each part is weighted depending on how many
+ *   parts there are in total.
+ * @memberOf IP
+ * @static
+ * @param {Number[]|String[]} parts IP parts to sum
+ * @return {?Number} Total value. Null if any part is invalid or if there are
+ *   more than 4 parts given.
+ */
+IP.addParts = function (parts) {
+	var value = 0;
+	switch (parts && parts.length) {
+		// 0.0.0.0
+		case 0:
+			break;
+		// 0.0.0.A
+		case 1:
+			value += IP.parsePart(parts[0]);
+			break;
+		// A.0.0.B
+		case 2:
+			value += IP.parsePart(parts[0]) * 0x01000000;
+			value += IP.parsePart(parts[1]);
+			break;
+		// A.B.0.C
+		case 3:
+			value += IP.parsePart(parts[0]) * 0x01000000;
+			value += IP.parsePart(parts[1]) * 0x00010000;
+			value += IP.parsePart(parts[2]);
+			break;
+		// A.B.C.D
+		case 4:
+			value += IP.parsePart(parts[0]) * 0x01000000;
+			value += IP.parsePart(parts[1]) * 0x00010000;
+			value += IP.parsePart(parts[2]) * 0x00000100;
+			value += IP.parsePart(parts[3]);
+			break;
+		default:
 			return null;
-		}
-		count = parts.length;
-		switch (count) {
-			// 0.0.0.0
-			case 0:
-				break;
-			// 0.0.0.A
-			case 1:
-				value += IP.parsePart(parts[0]);
-				break;
-			// A.0.0.B
-			case 2:
-				value += IP.parsePart(parts[0]) * 0x01000000;
-				value += IP.parsePart(parts[1]);
-				break;
-			// A.B.0.C
-			case 3:
-				value += IP.parsePart(parts[0]) * 0x01000000;
-				value += IP.parsePart(parts[1]) * 0x00010000;
-				value += IP.parsePart(parts[2]);
-				break;
-			// A.B.C.D
-			case 4:
-				value += IP.parsePart(parts[0]) * 0x01000000;
-				value += IP.parsePart(parts[1]) * 0x00010000;
-				value += IP.parsePart(parts[2]) * 0x00000100;
-				value += IP.parsePart(parts[3]);
-				break;
-			default:
-				return null;
-		}
 	}
-	if (value === null || value > IP.MAX_VALUE || value < IP.MIN_VALUE) {
-		return null;
-	}
-	return Math.floor(value);
+	return value;
 };
 
 /**
